@@ -24,8 +24,8 @@ def gen_point_list(filepath):
         line = file.readline()
         if line == '':
             break
-        line = map(int, line.split('\t'))
-        p = Point(line[0], line[1], line[2])
+        ID,x,y = map(int, line.split('\t'))
+        p = Point(ID, x, y)
         point_list.append(p)
 
     return point_list

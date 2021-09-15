@@ -17,4 +17,4 @@ class Vector2D:
 
     def cal_vector(self):
         self.__x = self.end_point.x - self.start_point.x
-        self.__y = self.end_point.y = self.start_point.y
+        self.__y = self.end_point.y - self.start_point.y
