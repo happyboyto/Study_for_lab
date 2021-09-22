@@ -27,6 +27,8 @@ def half_space_based_algo(point_list):
     for i in range(len(point_list)-1):
         for j in range(i+1,len(point_list)):
             line_vector = Vector2D(point_list[i],point_list[j])
+            if line_vector.x == 0 and line_vector.y == 0:
+                continue
             
             discriminator = 0
             flag = True
