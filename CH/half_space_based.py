@@ -12,36 +12,43 @@ def check_points_side(line_vector, target_point):
     z = cross_product(line_vector,target_vector)
 
     if z > 0:
-        return 1
+        return 'Right'
     
     elif z < 0:
-        return -1
+        return 'Left'
 
-    elif z == 0:
-        return 0
+    # elif z == 0:
+    #     return 'On the line'
     
 
 def half_space_based_algo(point_list):
     convex_hull_set = set([])
-    
     for i in range(len(point_list)-1):
         for j in range(i+1,len(point_list)):
             line_vector = Vector2D(point_list[i],point_list[j])
-            
-            discriminator = 0
+            if point_list[i].x == point_list[j].x and point_list[i].y == point_list[j].y:
+                continue
+
             flag = True
+            left_num = 0
+            right_num = 0 
             for target_point in point_list:
-                current = discriminator + check_points_side(line_vector,target_point)
-                if abs(discriminator) > abs(current):
+                current = check_points_side(line_vector,target_point)
+                if current == 'Right':
+                    right_num +=1
+                elif current == 'Left':
+                    left_num +=1
+                # elif current == 'On the line':
+                #     continue
+
+                if left_num and right_num:
                     flag = False
                     break
-                else:
-                    discriminator = current
-            
+                
             if flag:
-                convex_hull_set.add(point_list[i])
-                convex_hull_set.add(point_list[j])
-    
+                convex_hull_set.add(line_vector.start_point)
+                convex_hull_set.add(line_vector.end_point)
+
     return convex_hull_set
 
 
