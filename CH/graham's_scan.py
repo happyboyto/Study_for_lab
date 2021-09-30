@@ -61,7 +61,7 @@ def check_points_side(original_point, target1, target2):
 
 
 def graham_scan_algo(point_list):
-    convex_hull_set = set([])
+    convex_hull_set = []
     start_point = find_start_point(point_list)
     sorted_list = sort_all_point_as_CCW(start_point, point_list)
 
@@ -78,19 +78,26 @@ def graham_scan_algo(point_list):
                 break
             else:
                 index_list.pop()
+                index_list.pop()
+                index_list.append(i)
 
     for j in index_list:
-        convex_hull_set.add(sorted_list[j])
+        convex_hull_set.append(sorted_list[j])
 
     return convex_hull_set
 
 
 
 if __name__ == "__main__":
-    point_list = gen_point_list('./example_50.txt')
+    result_file = open('graham_scan_computation_time.txt','w')
+    for i in range(50):
+        filename = './example_{0}.txt'.format((i+1)*10)
+        point_list = gen_point_list(filename)
+        time_start = time.time()
+        convex_hull_set = graham_scan_algo(point_list)
+        time_elasped = time.time() - time_start
+        result_file.write(str(i*10)+'\t'+str(time_elasped)+'\n')
+        print('done',i*10,time_elasped)
+        #draw_result(set(point_list), convex_hull_set)
+    result_file.close()
     
-    time_start = time.time()
-    convex_hull_set = graham_scan_algo(point_list)
-    time_elasped = time.time() - time_start
-    print(time_elasped)
-    draw_result(set(point_list), convex_hull_set)

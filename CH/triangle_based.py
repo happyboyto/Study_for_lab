@@ -63,10 +63,14 @@ def triangle_based_algo(point_list):
     return convex_hull_set
  
 if __name__ == "__main__":
-    point_list = gen_point_list('./example_1000.txt')
-    
-    time_start = time.time()
-    convex_hull_set = triangle_based_algo(point_list)
-    time_elapsed = time.time()-time_start
-    print(time_elapsed)
-    draw_result(set(point_list),convex_hull_set)
+    result_file = open('triangle_based_computation_time.txt','w')
+    for i in range(50):
+        filename = './example_{0}.txt'.format((i+1)*10)
+        point_list = gen_point_list(filename)
+        time_start = time.time()
+        convex_hull_set = triangle_based_algo(point_list)
+        time_elasped = time.time() - time_start
+        result_file.write(str(i*10)+'\t'+str(time_elasped)+'\n')
+        print('done',(i+1)*10,time_elasped)
+        #draw_result(set(point_list), convex_hull_set)
+    result_file.close()

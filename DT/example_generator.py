@@ -4,7 +4,7 @@ import math
 
 def generate_example(num):
     example_file = open('example_{0}.txt'.format(num), 'w')
-    r_min, r_max = 0, 1000
+    r_min, r_max = 0, 100
     
     # x_min, x_max = 0, 1000
     # y_min, y_max = 0, 1000
@@ -25,5 +25,5 @@ def generate_example(num):
 
 if __name__ == "__main__":
     for i in range(1):
-        num = 10
+        num = 100
         generate_example(num)
