@@ -18,3 +18,9 @@ class Vector2D:
     def cal_vector(self):
         self.__x = self.end_point.x - self.start_point.x
         self.__y = self.end_point.y - self.start_point.y
+    
+    def cross_product(self, v):
+        z = self.x*v.y - self.y*v.x
+
+        return z
+
